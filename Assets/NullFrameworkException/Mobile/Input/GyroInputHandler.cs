@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+
 using UnityEngine;
 
 namespace NullFrameworkException.Mobile
 {
     public class GyroInputHandler : RunnableBehaviour
     {
-        [System.Serializable]
+        [Serializable]
         public class GyroscopeState
         {
             public Vector3 rotationDelta;
@@ -24,7 +24,7 @@ namespace NullFrameworkException.Mobile
         protected override void OnRun(params object[] _params)
         {
             gyroscopeState.deviceRotation = Input.gyro.attitude;
-            gyroscopeState.rotationDelta = Input.gyro.gravity;
+            gyroscopeState.rotationDelta = Input.gyro.rotationRateUnbiased;
         }
     }
 }

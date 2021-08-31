@@ -20,6 +20,7 @@ namespace NullFrameworkException.Mobile.InputHandling
         {
             RunnableUtils.Setup(ref joystick, gameObject, true, this);
             RunnableUtils.Setup(ref swiping, gameObject, true);
+            RunnableUtils.Setup(ref gyroscope, gameObject, true);
         }
 
         // Update is called once per frame
@@ -27,6 +28,7 @@ namespace NullFrameworkException.Mobile.InputHandling
         {
             RunnableUtils.Run(ref joystick, gameObject, true);
             RunnableUtils.Run(ref swiping, gameObject, true);
+            RunnableUtils.Run(ref gyroscope, gameObject, true);
         }
     }
 }
