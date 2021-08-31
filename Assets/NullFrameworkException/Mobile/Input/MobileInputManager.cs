@@ -6,7 +6,12 @@ namespace NullFrameworkException.Mobile.InputHandling
     {
         public JoystickInputHandler joystick;
         public SwipeInputHandler swiping;
+        public GyroInputHandler gyroscope;
 
+        /// <summary> Attempt to get the data about the gyroscope this frame </summary>
+        public static GyroInputHandler.GyroscopeState GetGyroscopeState() 
+            => Instance.gyroscope != null ? Instance.gyroscope.gyroscopeState : new GyroInputHandler.GyroscopeState();
+        
         /// <summary> Attempt to get the axis of the joystick attached to the system. </summary>
         public static Vector2 GetJoystickAxis() => Instance.joystick != null ? Instance.joystick.Axis : Vector2.zero;
 
