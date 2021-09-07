@@ -14,7 +14,7 @@ namespace NullFrameworkException.Mobile.InputHandling
 			/// <summary>
 			/// The list of points along the swipe, added to each frame.
 			/// </summary>
-			public readonly List<Vector2> positions = new List<Vector2>();
+			public readonly Queue<Vector2> positions = new Queue<Vector2>();
 			/// <summary>
 			/// The position the swipe started from.
 			/// </summary>
@@ -28,7 +28,7 @@ namespace NullFrameworkException.Mobile.InputHandling
 			{
 				initialPosition = _initialPosition;
 				fingerId = _fingerId;
-				positions.Add(_initialPosition);
+				positions.Enqueue(_initialPosition);
 			}
 		}
 
@@ -69,7 +69,12 @@ namespace NullFrameworkException.Mobile.InputHandling
 					else if(touch.phase == TouchPhase.Moved && swipes.TryGetValue(touch.fingerId, out Swipe swipe))
 					{
 						// This touch moved so add the position to the swipe
-						swipe.positions.Add(touch.position);
+						swipe.positions.Enqueue(touch.position);
+
+						if(swipe.positions.Count > 30)
+						{
+							swipe.positions.Dequeue();
+						}
 					}
 					else if((touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled) && swipes.TryGetValue(touch.fingerId, out swipe))
 					{
